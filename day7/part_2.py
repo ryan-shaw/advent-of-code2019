@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from itertools import permutations
+
 OP_ADD = 1
 OP_MULTIPLY = 2
 OP_INPUT = 3
@@ -130,14 +132,7 @@ class Intcode(object):
 def get_inputs():
     start = 5
     end = 10
-    for x in range(start, end):
-        for y in range(start, end):
-            for z in range(start, end):
-                for v in range(start, end):
-                    for w in range(start, end):
-                        l = [x, y, z, v, w]
-                        if len(set(l)) == len(l):
-                            yield [x, y, z, v, w]
+    return permutations(range(start, end))
 
 max_result = 0
 solution = None
