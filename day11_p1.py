@@ -3,20 +3,6 @@ from sys import stdout
 from aoc import timer
 from intcode import Intcode
 
-OP_ADD = 1
-OP_MULTIPLY = 2
-OP_INPUT = 3
-OP_OUTPUT = 4
-OP_JUMP_TRUE = 5
-OP_JUMP_FALSE = 6
-OP_LT = 7
-OP_EQ = 8
-OP_REL_BASE_OFF = 9
-
-ARG_POSITION = 0
-ARG_IMMEDIATE = 1
-ARG_RELATIVE = 2
-
 def get_input():
     with open('inputs/input11', 'r') as f:
         return list(map(lambda x : int(x), f.readline().split(',')))
@@ -45,21 +31,7 @@ def solve():
         max_y = max(max_y, y)
         min_x = min(min_x, x)
         min_y = min(min_y, y)
-        if rotate == 0:
-            # left 90 degress
-            if direction == 0:
-                direction = 3
-            else:
-                direction -= 1
-        elif rotate == 1:
-            # right 90 degress
-            if direction == 3:
-                direction = 0
-            else:
-                direction += 1
-        else:
-            raise Exception('invalid rotation')
-
+        direction = (direction + [-1, 1][rotate]) % 4
         if direction == 0:
             x += 1
         elif direction == 1:
