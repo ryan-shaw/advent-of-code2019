@@ -110,11 +110,11 @@ class Intcode(object):
             # print('exit')
             return True
         elif opcode == OP_INPUT:
-            # if not self.inputs:
-            #     # suspend program
-            #     print('Suspended waiting input pos', self.offset)
-            #     self.suspend()
-            #     return 
+            if not self.inputs:
+                # suspend program
+                print('Suspended waiting input pos', self.offset)
+                self.suspend()
+                return 
             # print(self.inputs)
             res = self.inputs.pop(0)
             pos = self.next()
@@ -122,7 +122,6 @@ class Intcode(object):
         elif opcode == OP_OUTPUT:
             self.print(arg_modes)
             # print('Suspended waiting input pos', self.offset)
-            self.suspend()
             return
         else:
             raise Exception('opcode not known {} pos {}'.format(opcode, self.offset))
